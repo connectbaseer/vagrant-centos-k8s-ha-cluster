@@ -31,6 +31,7 @@ Vagrant.configure("2") do |config|
           node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
             s.args = ["eth1"]
           end
+          node.vm.provision "shell", :path => "scripts/script_master0#{i}.sh"
       end
   end
 
@@ -46,7 +47,8 @@ Vagrant.configure("2") do |config|
       node.vm.network "forwarded_port", guest: 22, host: "#{2820 + i}"
       node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
         s.args = ["eth1"]
-      end 
+      end
+      node.vm.provision "shell", :path => "scripts/script_worker0#{i}.sh" 
       end
   end
 
@@ -62,7 +64,8 @@ Vagrant.configure("2") do |config|
       node.vm.network "forwarded_port", guest: 22, host: "#{2920 + i}"
       node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
         s.args = ["eth1"]
-      end 
+      end
+      node.vm.provision "shell", :path => "scripts/script_lb.sh" 
       end
   end
 end
