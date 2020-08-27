@@ -6,9 +6,9 @@ NO_WORKER_NODE = 2   # Specify Number of Worker Nodes
 NO_LB_NODE = 1       # Specify Number ofLB Nodes
 
 
-IP_ADDR = "192.168.30."
+IP_ADDR = "192.168.30."   #IF you are changing this IP range accordingly make the changes in the script_* shell scripts 
 LB_IP_START = 1
-MASTER_IP_START =4   
+MASTER_IP_START = 4   
 WORKER_IP_START = 9     
 
 
