@@ -27,7 +27,6 @@ Vagrant.configure("2") do |config|
           end
           node.vm.hostname = "k8s-master0#{i}"
           node.vm.network :private_network, ip: IP_ADDR + "#{MASTER_IP_START + i}"
-          node.vm.network "forwarded_port", guest: 22, host: "#{2810 + i}"
           node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
             s.args = ["eth1"]
           end
@@ -36,15 +35,14 @@ Vagrant.configure("2") do |config|
   end
 
   (1..NO_WORKER_NODE).each do |i|
-    config.vm.define "k8s-woker0#{i}" do |node|
+    config.vm.define "k8s-worker0#{i}" do |node|
       node.vm.provider "virtualbox" do |vb|
-        vb.name = "k8s-woker0#{i}"
+        vb.name = "k8s-worker0#{i}"
         vb.memory = 2048
         vb.cpus = 1
       end
-      node.vm.hostname = "k8s-woker0#{i}"
+      node.vm.hostname = "k8s-worker0#{i}"
       node.vm.network :private_network, ip: IP_ADDR + "#{WORKER_IP_START + i}"
-      node.vm.network "forwarded_port", guest: 22, host: "#{2820 + i}"
       node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
         s.args = ["eth1"]
       end
@@ -61,7 +59,6 @@ Vagrant.configure("2") do |config|
       end
       node.vm.hostname = "k8s-lb"
       node.vm.network :private_network, ip: IP_ADDR + "#{LB_IP_START  + i}"
-      node.vm.network "forwarded_port", guest: 22, host: "#{2920 + i}"
       node.vm.provision "setup-hosts", :type => "shell", :path => "scripts/set-up.sh" do |s|
         s.args = ["eth1"]
       end
