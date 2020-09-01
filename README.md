@@ -255,16 +255,9 @@ To start using your cluster, you need to run the following as a regular user:
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
-**Step 5 - Create a CNI for POD networking** 
+ 
 
-Note : Run on control-plane node with non root user
-
-``
-kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-``
-Join the other master node using 
-
-**Step 6 -- Join the other master**
+**Step 5 -- Join the other master**
 
 Note: Run as root
 
@@ -275,6 +268,16 @@ kubeadm join 192.168.0.200:6443 --token 9vr73a.a8uxyaju799qwdjv \
 --apiserver-advertise-address=192.168.56.3 
 ```
 apiserver-advertise-address=192.168.56.3 --> address of the current master node
+
+**Step 6 - Create a CNI for POD networking** 
+
+Note : Run on control-plane node with non root user
+
+``
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+``
+Join the other master node using
+
 
 **Step 7 -- Joint the worker nodes**
 
