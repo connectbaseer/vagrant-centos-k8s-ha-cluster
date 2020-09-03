@@ -155,8 +155,7 @@ SELINUX=disabled in the cat /etc/selinux/config and reboot the server
 Start Nginx
 
 ```
-sudo yum install nginx
-sudo systemctl start ngin
+sudo systemctl start nginx
 ```
 Nginx configuration.
 
